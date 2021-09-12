@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityModel;
+﻿using System.Collections.Generic;
 using IdentityServer4.Models;
 
 namespace Server
