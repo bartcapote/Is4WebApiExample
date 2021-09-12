@@ -32,15 +32,6 @@ namespace Server
         public static IEnumerable<Client> GetClients() =>
             new List<Client>()
             {
-                //new Client
-                //{
-                //    ClientId = "my_client_id",
-                //    ClientSecrets = { new Secret("client_secret".ToSha256()) },
-
-                //    AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                //    AllowedScopes = { "MyApiOne" }
-                //},
                 new Client()
                 {
                     ClientId = "client_id_js",
