@@ -35,7 +35,10 @@ namespace Server
                 new Client()
                 {
                     ClientId = "client_id_js",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequireClientSecret = false, // PKCE
+                    AllowedGrantTypes = GrantTypes.Code, // code instead of implicit because of PKCE
+                    RequirePkce = true, // defaults to true?
+
                     RedirectUris = { "https://localhost:44366/home/signin" },
                     AllowedCorsOrigins = { "https://localhost:44366" },
 
