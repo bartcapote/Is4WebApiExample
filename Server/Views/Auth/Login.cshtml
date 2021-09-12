@@ -1,16 +1,17 @@
 ﻿@model LoginViewModel
 
 
+<p>user: bob<br/>password: password</p>
 
 <form asp-controller="Auth" asp-action="Login" method="post">
-    <input type="hidden" asp-for="ReturnUrl"/>
+    <input type="hidden" asp-for="ReturnUrl" />
     <div>
         <label>Username</label>
-        <input asp-for="Username"/>
+        <input asp-for="Username" />
     </div>
     <div>
         <label>Password</label>
-        <input asp-for="Password"/>
+        <input asp-for="Password" />
     </div>
     <div>
         <button type="submit">Sign In</button>
