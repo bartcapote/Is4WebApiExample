@@ -65,6 +65,7 @@ axios.interceptors.response.use(
                     axiosConfig.headers["Authorization"] = "Bearer " + user.access_token;
 
                     // retry the http request
+                    refreshing = false;
                     return axios(axiosConfig);
                 }); // TODO Iss 4 make this signinSilentCallback() - needs a dedicated silenSignIn page in SPA
             }
