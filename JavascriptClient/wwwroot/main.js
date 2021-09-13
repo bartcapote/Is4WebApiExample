@@ -4,7 +4,7 @@ var config = {
     client_id: "client_id_js",
     response_type: "code", // instead of "id_token token" because of PKCE
     redirect_uri: "https://localhost:44366/Home/SignIn",
-    scope: "openid MyApiOne Blob"
+    scope: "openid MyApiOne Blob" // TODO Iss1
 };
 
 var userManager = new Oidc.UserManager(config);
@@ -14,7 +14,7 @@ var signIn = function () {
 };
 
 userManager.getUser().then(user => {
-    console.log("user:", user)
+    console.log("user:", user);
     if(user) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + user.access_token;
     }
@@ -22,7 +22,7 @@ userManager.getUser().then(user => {
 
 var callApi = function () {
     axios.get("https://localhost:44358/secret")
-    .then(result => {
-        console.log(result);
-    })
+        .then(result => {
+            console.log(result);
+        });
 }
