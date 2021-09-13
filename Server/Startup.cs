@@ -30,6 +30,7 @@ namespace Server
             {
                 //options.Cookie.Name = "IdentityServer.Cookie";
                 options.LoginPath = "/Auth/Login";
+                options.LogoutPath = "/Auth/Logout";
             });
 
 

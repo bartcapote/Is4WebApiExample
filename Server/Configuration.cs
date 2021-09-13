@@ -40,6 +40,7 @@ namespace Server
                     RequirePkce = true, // defaults to true?
 
                     RedirectUris = { "https://localhost:44366/home/signin" },
+                    PostLogoutRedirectUris = { "https://localhost:44366/home/index" },
                     AllowedCorsOrigins = { "https://localhost:44366" },
 
                     AllowedScopes =

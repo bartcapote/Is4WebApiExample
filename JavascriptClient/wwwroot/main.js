@@ -4,6 +4,7 @@ var config = {
     client_id: "client_id_js",
     response_type: "code", // instead of "id_token token" because of PKCE
     redirect_uri: "https://localhost:44366/Home/SignIn",
+    post_logout_redirect_uri: "https://localhost:44366/Home/Index",
     scope: "openid MyApiOne Blob my.api.claim my.scope" // TODO Iss1, not-todo: Iss3
 };
 
@@ -11,6 +12,10 @@ var userManager = new Oidc.UserManager(config);
 
 var signIn = function () {
     userManager.signinRedirect();
+};
+
+var signOut = function () {
+    userManager.signoutRedirect();
 };
 
 userManager.getUser().then(user => {
@@ -40,7 +45,7 @@ axios.interceptors.response.use(
         var axiosConfig = error.response.config;
         
         // if error response is 401 try to refresh token
-        if (error.response.status === 401 && userInStore) {
+        if (error.response.status === 401 /*&& userInStore*/) {
             console.error("access token expired");
             
             // if already refreshing don't make another request
