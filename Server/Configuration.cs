@@ -46,10 +46,12 @@ namespace Server
                     {
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
                         "MyApiOne",
+                        "my.api.claim",
+                        "my.scope", // Iss 3
                         "Blob" // TODO Iss1
                     },
 
-                    AllowAccessTokensViaBrowser = true,
+                    AllowAccessTokensViaBrowser = true
                 }
             };
 
@@ -57,6 +59,7 @@ namespace Server
             new List<ApiScope>()
             {
                 new ApiScope("MyApiOne"),
+                new ApiScope("my.api.claim", displayName: "This is a custom user claim / api scope"),
                 new ApiScope("Blob") // TODO Iss1
             };
     }

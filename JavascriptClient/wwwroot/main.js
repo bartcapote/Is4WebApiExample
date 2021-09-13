@@ -4,7 +4,7 @@ var config = {
     client_id: "client_id_js",
     response_type: "code", // instead of "id_token token" because of PKCE
     redirect_uri: "https://localhost:44366/Home/SignIn",
-    scope: "openid MyApiOne Blob" // TODO Iss1
+    scope: "openid MyApiOne Blob my.api.claim my.scope" // TODO Iss1, not-todo: Iss3
 };
 
 var userManager = new Oidc.UserManager(config);
