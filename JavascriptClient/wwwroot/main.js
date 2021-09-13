@@ -25,8 +25,8 @@ userManager.getUser().then(user => {
     }
 });
 
-var callApi = function () {
-    axios.get("https://localhost:44358/secret")
+var callApi = function (endpoint) {
+    axios.get(`https://localhost:44358/${endpoint}`)
         .then(result => {
             console.log(result);
             refreshing = false;

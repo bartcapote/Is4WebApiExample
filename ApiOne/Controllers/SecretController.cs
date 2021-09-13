@@ -8,10 +8,17 @@ namespace ApiOne.Controllers
     {
         [Route("/secret")]
         [Authorize]
-        public string Index()
+        public string Secret()
         {
             var claims = User.Claims.ToList();
             return "secret message from ApiOne";
+        }
+
+        [Route("/restrictedSecret")]
+        [Authorize(policy: "RestrictedByClaim")]
+        public string RestrictedSecret()
+        {
+            return "secret message from restricted endpoint in ApiOne";
         }
     }
 }

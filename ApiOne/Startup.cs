@@ -26,6 +26,16 @@ namespace ApiOne
                     }; // to expire access token immediately
                 });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RestrictedByClaim", builder =>
+                {
+                    builder
+                        .RequireClaim("my.api.claim")
+                        .Build();
+                } );
+            });
+
             services.AddCors(options =>
                 options.AddPolicy("AllowAll",
                     policy => policy.AllowAnyOrigin()
