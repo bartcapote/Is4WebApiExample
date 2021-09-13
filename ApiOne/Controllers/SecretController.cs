@@ -15,7 +15,7 @@ namespace ApiOne.Controllers
         }
 
         [Route("/restrictedSecret")]
-        [Authorize(policy: "RestrictedByClaim")]
+        [Authorize("RestrictedByClaim")]
         public string RestrictedSecret()
         {
             return "secret message from restricted endpoint in ApiOne";
