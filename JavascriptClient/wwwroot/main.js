@@ -24,26 +24,31 @@ var callApi = function () {
     axios.get("https://localhost:44358/secret")
         .then(result => {
             console.log(result);
+            refreshing = false;
         });
 };
 
-var refreshing = false;
+var refreshing = false;        
 
 // axios http middleware. token refresh. DO NOT use oidc-client-js automaticSilentRenew flag, it's deprecated and buggy.
 axios.interceptors.response.use(
     function(response) { return response; },
-    function(error) {
+    async function(error) {
+        var userInStore = await userManager.getUser().then(user => user != null);
         console.error("axios intercepted error: ", error.response); // TODO delete this
         
         var axiosConfig = error.response.config;
         
         // if error response is 401 try to refresh token
-        if (error.response.status === 401) {
-            console.error("axios error 401");
+        if (error.response.status === 401 && userInStore) {
+            console.error("access token expired");
             
             // if already refreshing don't make another request
             if (!refreshing) {
                 console.log("starting token refresh"); // TODO delete this
+
+                // maybe catch required login here? something like session expired?
+
                 refreshing = true;
 
                 // do the refresh

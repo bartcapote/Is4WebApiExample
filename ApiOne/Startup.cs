@@ -1,7 +1,9 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ApiOne
 {
@@ -18,6 +20,10 @@ namespace ApiOne
                     //{
                     //    ValidateAudience = false // this^ https://identityserver4.readthedocs.io/en/latest/quickstarts/1_client_credentials.html#configuration
                     //};
+                    config.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ClockSkew = TimeSpan.Zero
+                    }; // to expire access token immediately
                 });
 
             services.AddCors(options =>
