@@ -51,6 +51,8 @@ namespace Server
                         "Blob" // TODO Iss1
                     },
 
+                    AccessTokenLifetime = 1,
+
                     AllowAccessTokensViaBrowser = true,
                     //AlwaysIncludeUserClaimsInIdToken = true // allows to pass user claims to id token hence bloats it with data. not sure if whether allowing scope manually in allowed scopes adds a round trip? doesn't seem like it.
                 }

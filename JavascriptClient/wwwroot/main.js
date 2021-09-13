@@ -14,7 +14,7 @@ var signIn = function () {
 };
 
 userManager.getUser().then(user => {
-    console.log("user:", user);
+    console.log("user:", user); // TODO delete this
     if(user) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + user.access_token;
     }
@@ -25,4 +25,41 @@ var callApi = function () {
         .then(result => {
             console.log(result);
         });
-}
+};
+
+var refreshing = false;
+
+// axios http middleware. token refresh. DO NOT use oidc-client-js automaticSilentRenew flag, it's deprecated and buggy.
+axios.interceptors.response.use(
+    function(response) { return response; },
+    function(error) {
+        console.error("axios intercepted error: ", error.response); // TODO delete this
+        
+        var axiosConfig = error.response.config;
+        
+        // if error response is 401 try to refresh token
+        if (error.response.status === 401) {
+            console.error("axios error 401");
+            
+            // if already refreshing don't make another request
+            if (!refreshing) {
+                console.log("starting token refresh"); // TODO delete this
+                refreshing = true;
+
+                // do the refresh
+                return userManager.signinSilent().then(user => {
+                    console.log("new user: ", user) // TODO delete this
+
+                    // update the http request and axios client
+                    axios.defaults.headers.common["Authorization"] = "Bearer " + user.access_token;
+                    axiosConfig.headers["Authorization"] = "Bearer " + user.access_token;
+
+                    // retry the http request
+                    return axios(axiosConfig);
+                }); // TODO Iss 4 make this signinSilentCallback() - needs a dedicated silenSignIn page in SPA
+            }
+        }
+
+        return Promise.reject(error)
+    }
+);
