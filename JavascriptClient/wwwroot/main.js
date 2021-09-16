@@ -10,6 +10,7 @@ const config = {
 };
 
 const userManager = new Oidc.UserManager(config);
+Oidc.Log.logger = console;
 
 const signIn = function () {
     setPostSignInRedirect(window.location.pathname);
