@@ -1,6 +1,6 @@
 ﻿
 <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.11.5/oidc-client.min.js"></script>
-
+<script src="~/main.js"></script>
 <script>
     var userManager = new Oidc.UserManager({
         userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
@@ -9,6 +9,8 @@
 
     userManager.signinCallback().then(result => {
 
-        window.location.href = "/home/index";
+        var debugCookieValue = getPostSignInRedirect();
+        var path = getPostSignInRedirect() ?? "/";
+        window.location.href = path;
     });
 </script>

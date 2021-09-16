@@ -42,7 +42,7 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
-            // check if the model is valid
+            // TODO check if the model is valid
             //...
 
             var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
