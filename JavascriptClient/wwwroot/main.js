@@ -9,7 +9,7 @@ const config = {
     scope: "openid MyApiOne Blob my.api.claim my.scope" // TODO Iss1, not-todo: Iss3
 };
 
-const userManager = new Oidc.UserManager(config);
+var userManager = new Oidc.UserManager(config);
 Oidc.Log.logger = console;
 
 const signIn = function () {
