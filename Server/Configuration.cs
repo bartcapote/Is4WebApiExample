@@ -46,6 +46,7 @@ namespace Server
                     AllowedScopes =
                     {
                         IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServer4.IdentityServerConstants.StandardScopes.Profile,
                         "MyApiOne",
                         "my.api.claim",
                         "my.scope", // Iss 3

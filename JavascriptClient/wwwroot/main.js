@@ -6,7 +6,9 @@ const config = {
     response_type: "code", // instead of "id_token token" because of PKCE
     redirect_uri: "https://localhost:44366/Home/SignIn",
     post_logout_redirect_uri: "https://localhost:44366/Home/Index",
-    scope: "openid MyApiOne Blob my.api.claim my.scope" // TODO Iss1, not-todo: Iss3
+    //loadUserInfo: true, //supposed to load info from userInfo endpoint into id token but doesnt really?
+    //clockSkew: 0, TODO apparently can be used here, check this sometime
+    scope: "openid profile MyApiOne Blob my.api.claim my.scope" // TODO Iss1, not-todo: Iss3
 };
 
 var userManager = new Oidc.UserManager(config);

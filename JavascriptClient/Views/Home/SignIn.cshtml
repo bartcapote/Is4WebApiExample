@@ -3,6 +3,7 @@
 <script src="~/main.js"></script>
 <script>
     var userManager = new Oidc.UserManager({
+        //loadUserInfo: true, // doesn't work?
         userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
         response_mode: "query" // PKCE
     });
