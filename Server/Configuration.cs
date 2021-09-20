@@ -39,8 +39,8 @@ namespace Server
                     AllowedGrantTypes = GrantTypes.Code, // code instead of implicit because of PKCE
                     RequirePkce = true, // defaults to true?
 
-                    RedirectUris = { "https://localhost:44366/home/signin" },
-                    PostLogoutRedirectUris = { "https://localhost:44366/home/index" },
+                    RedirectUris = { "https://localhost:44366/signin" },
+                    PostLogoutRedirectUris = { "https://localhost:44366/" },
                     AllowedCorsOrigins = { "https://localhost:44366" },
 
                     AllowedScopes =
@@ -53,7 +53,7 @@ namespace Server
                         "Blob" // TODO Iss1
                     },
 
-                    AccessTokenLifetime = 1,
+                    AccessTokenLifetime = 50,
 
                     AllowAccessTokensViaBrowser = true,
                     //AlwaysIncludeUserClaimsInIdToken = true // allows to pass user claims to id token hence bloats it with data. not sure if whether allowing scope manually in allowed scopes adds a round trip? doesn't seem like it.

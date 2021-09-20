@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Server.Data;
@@ -11,10 +12,17 @@ namespace Server
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseInMemoryDatabase("MemoryDb"));
+                options.UseSqlServer(_configuration.GetConnectionString("Identity")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
                 {
@@ -28,7 +36,7 @@ namespace Server
 
             services.ConfigureApplicationCookie(options =>
             {
-                //options.Cookie.Name = "IdentityServer.Cookie";
+                options.Cookie.Name = "IdentityServer.Cookie";
                 options.LoginPath = "/Auth/Login";
                 options.LogoutPath = "/Auth/Logout";
             });
