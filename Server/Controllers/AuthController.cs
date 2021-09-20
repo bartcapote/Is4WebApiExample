@@ -2,17 +2,18 @@
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Server.Data;
 
 namespace Server.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IIdentityServerInteractionService _interactionService;
 
-        public AuthController(SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager, IIdentityServerInteractionService interactionService)
+        public AuthController(SignInManager<AppUser> signInManager,
+            UserManager<AppUser> userManager, IIdentityServerInteractionService interactionService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -76,7 +77,7 @@ namespace Server.Controllers
                 return View(vm);
             }
 
-            var user = new IdentityUser(vm.Username);
+            var user = new AppUser(vm.Username);
             var result = await _userManager.CreateAsync(user, vm.Password);
 
             if (result.Succeeded)

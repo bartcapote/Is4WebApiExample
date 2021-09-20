@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Server.Data;
 
 namespace Server
 {
@@ -19,9 +20,9 @@ namespace Server
             using (var scope = host.Services.CreateScope())
             {
                 var userManager = scope.ServiceProvider
-                    .GetRequiredService<UserManager<IdentityUser>>();
+                    .GetRequiredService<UserManager<AppUser>>();
 
-                var user = new IdentityUser("bob");
+                var user = new AppUser("admin");
                 userManager.CreateAsync(user, "password").GetAwaiter().GetResult();
                 userManager.AddClaimAsync(user, new Claim("my.claim", "my.claim.cookie")) // Iss 3 add a claim to our user, on the side of IS4
                     .GetAwaiter().GetResult();

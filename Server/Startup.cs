@@ -24,7 +24,7 @@ namespace Server
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("Identity")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
                     options.Password.RequiredLength = 3;
                     options.Password.RequireDigit = false;
@@ -43,7 +43,7 @@ namespace Server
 
 
             services.AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
+                .AddAspNetIdentity<AppUser>()
                 .AddInMemoryApiResources(Configuration.GetApis())
                 .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                 .AddInMemoryApiScopes(Configuration.GetApiScopes())
